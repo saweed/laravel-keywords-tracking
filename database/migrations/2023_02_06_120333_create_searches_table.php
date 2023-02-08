@@ -20,6 +20,10 @@ class CreateSearchesTable extends Migration
             $table->integer('location_code');
             $table->string('device');
             $table->integer('repetitions');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

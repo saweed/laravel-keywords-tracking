@@ -11,7 +11,8 @@ class DFSRepository implements DFSRepositoryInterface
 {
     public function getAllSearches() 
     {
-        return Search::all();
+        $user_id = auth()->user()->id;
+        return Search::all()->where('user_id', $user_id);
     }
 
     public function getAllSearchesWithResults() 
@@ -40,8 +41,11 @@ class DFSRepository implements DFSRepositoryInterface
     }
 
     public function searchDFS(Request $request) {
-
+        //increase execution time to avoid connection time out
+        ini_set('memory_limit', '1024M');
+        ini_set('max_execution_time', 0);
         // prepare data from request
+        $user_id = auth()->user()->id;
         $keyword = mb_convert_encoding($request->get('keyword'), "UTF-8");
         $location_code = $request->get('country_code');
         $device = $request->get('device');
@@ -76,7 +80,8 @@ class DFSRepository implements DFSRepositoryInterface
             "keyword" => $keyword,
             "location_code" => $location_code,
             "device"=> $device,
-            "repetitions"=> $repetitions
+            "repetitions"=> $repetitions,
+            "user_id"=> $user_id
         ]);
         $search_results = [];
         // iterate the api request as per repetitions entered by user

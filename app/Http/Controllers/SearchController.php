@@ -102,5 +102,7 @@ class SearchController extends Controller
     public function destroy($id)
     {
         //
+        $result = $this->dfsRepository->deleteSearch($id);
+        return redirect()->route('home');
     }
 }

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes();
@@ -25,3 +25,4 @@ Route::get('/search/add', [App\Http\Controllers\SearchController::class, 'create
 Route::post('/search/sotre', [App\Http\Controllers\SearchController::class, 'store'])->name('store')->middleware('auth');
 Route::get('/search/list', [App\Http\Controllers\SearchController::class, 'index'])->name('list')->middleware('auth');
 Route::get('/search/{id}', [App\Http\Controllers\SearchController::class, 'show'])->name('show')->middleware('auth');
+Route::delete('/destroy/{id}', [App\Http\Controllers\SearchController::class, 'destroy'])->name('destroy')->middleware('auth');
