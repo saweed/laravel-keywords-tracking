@@ -10,7 +10,6 @@
       return arr;
   });
   records.unshift(['Domain', 'Index', 'Rank', 'Count']);
-  console.log(records);
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {

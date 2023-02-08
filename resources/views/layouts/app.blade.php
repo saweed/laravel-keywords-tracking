@@ -7,7 +7,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+    @guest
+        {{ config('app.name', 'Laravel') }}
+    @else
+        {{ __('Data 4 SEO') }}
+    @endguest
+    </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
