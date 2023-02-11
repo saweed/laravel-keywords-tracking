@@ -15,10 +15,10 @@
                         <br />
                         <a class="btn btn-danger" href="#"
                                        onclick="event.preventDefault();
-                                       document.getElementById('delete-form').submit();">
+                                       document.getElementById('delete-form-{{$result->id}}').submit();">
                                         {{ __('Delete') }}
                                     </a>
-                                    <form id="delete-form" action="{{ route('destroy', ['id' => $result->id]) }}" method="POST" class="d-none">
+                                    <form id="delete-form-{{$result->id}}" action="{{ route('destroy', ['id' => $result->id]) }}" method="POST" class="d-none">
                                         <input type="hidden" name="_method" value="DELETE" />
                                         @csrf
                                     </form>

@@ -13,7 +13,7 @@ class Search extends Model
 
     public function results()
     {
-        return $this->hasMany(Result::class)->selectRaw("`domain`, `rank`, count(`domain`) as `counts`")->groupBy('domain')->groupBy('rank')->orderBy('domain', 'desc');
+        return $this->hasMany(Result::class)->orderBy('domain', 'asc')->orderBy('iteration', 'asc');
     }
     public function user()
     {

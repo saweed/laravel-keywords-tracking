@@ -1,5 +1,11 @@
 @extends('layouts.app') @section('content')
 <div class="container">
+    @if ($errors->has('message'))
+    <div class="text-danger">
+        <strong>Error!</strong>
+        {{ $errors->first('message') }}
+    </div>
+    @endif
     <form method="post" action="{{ route('store') }}">
         @csrf
         <div class="form-group">
