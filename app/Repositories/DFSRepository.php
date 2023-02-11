@@ -77,7 +77,7 @@ class DFSRepository implements DFSRepositoryInterface
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => $data,
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Basic bXVoYW1tYWQuaW5hbUBjb252by5jb206ODgyYTFlMjBkZmZiZjVlNA==',
+                'Authorization: ' . config('app.DFS_AUTHORIZATION'),
                 'Content-Type: application/json'
             ),
         ));

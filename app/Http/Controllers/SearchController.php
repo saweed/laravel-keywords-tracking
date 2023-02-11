@@ -63,25 +63,14 @@ class SearchController extends Controller
 
         // // setup post data for dataforseo
         // $data = '[
-        //     {"language_code":"en", "keyword":"'.$keyword.'", "location_code":"'.$location_code.'", "device":"'.$device.'", "depth": 100}
-        // ]';
-        // $data = '[
         //     {
-        //         "language_code": "en",
-        //         "location_code": 2840,
-        //         "keyword": "cake receipe"
-        //     },
-        //     {
-        //         "language_name": "English",
-        //         "location_name": "United States",
-        //         "keyword": "albert einstein",
-        //         "priority": 2,
-        //         "tag": "some_string_123",
-        //         "pingback_url": "http://keyword-demo.waqas.info/search/result?id=$id&tag=$tag"
-        //     },
-        //     {
-        //         "postback_data": "json",
-        //         "postback_url": "http://keyword-demo.waqas.info/search/result"
+        //         "language_code":"en",
+        //         "keyword":"'.$keyword.'",
+        //         "location_code":"'.$location_code.'",
+        //         "device":"'.$device.'",
+        //         "depth": 100,
+        //         "postback_url": "http://keyword-demo.waqas.info/dataforseo/result",
+        //         "postback_data": "regular"
         //     }
         // ]';
         // //initiate curl
@@ -115,28 +104,28 @@ class SearchController extends Controller
         // //     "user_id"=> $user_id
         // // ]);
 
-        // $response = curl_exec($curl);
-        // dd($response);
-        // $search_results = [];
+        // // $response = curl_exec($curl);
+        // // dd($response);
+        // $response_array = [];
         // // iterate the api request as per repetitions entered by user
-        // // for($i = 1; $i <= $repetitions; $i++) {
-        // //     $response = curl_exec($curl);
-        // //     $response_array = json_decode($response, true);
-        // //     // dump api response data into database
-        // //     foreach($response_array['tasks'][0]['result'][0]['items'] as $item) {
-        // //         if($item['type'] == 'organic') {
-        // //             $domain = isset($item['domain']) ? $item['domain'] : 'no domain data';
-        // //             Result::create([
-        // //                 'domain' => $domain,
-        // //                 'rank' => $item['rank_group'],
-        // //                 'iteration' => $i,
-        // //                 'search_id' => $result->id,
-        // //             ]);
-        // //         }
-        // //     }
-        // // }
+        // for($i = 1; $i <= $repetitions; $i++) {
+        //     $response = curl_exec($curl);
+        //     $response_array[] = json_decode($response, true);
+        //     // dump api response data into database
+        //     // foreach($response_array['tasks'][0]['result'][0]['items'] as $item) {
+        //     //     if($item['type'] == 'organic') {
+        //     //         $domain = isset($item['domain']) ? $item['domain'] : 'no domain data';
+        //     //         Result::create([
+        //     //             'domain' => $domain,
+        //     //             'rank' => $item['rank_group'],
+        //     //             'iteration' => $i,
+        //     //             'search_id' => $result->id,
+        //     //         ]);
+        //     //     }
+        //     // }
+        // }
         // curl_close($curl);
-        // dd($result);
+        // dd($response_array);
     
         // Form validation
         $this->validate($request, [
@@ -144,9 +133,9 @@ class SearchController extends Controller
             'repetitions' => 'required|numeric',
          ]);
         $result = $this->dfsRepository->searchDFS($request);
-        if($result['status_code'] != 20000){
-            return \Redirect::back()->withErrors(['message' => $result['status_message']]);
-        }
+        // if($result['status_code'] != 20000){
+        //     return \Redirect::back()->withErrors(['message' => $result['status_message']]);
+        // }
         return redirect()->route('show', ['id' => $result->id]);
     }
 
@@ -202,7 +191,7 @@ class SearchController extends Controller
     }
 
     public function taskNotification(Request $request, $id=null, $tag=null){
-        Log::info($id . ' -- ' . $tag);
+        Log::info($id . ' -- Task Completed -- ' . $tag . ' -------- ' . print_r($request, true));
     }
     public function taskResult(Request $request){
         Log::info(print_r($request, true));

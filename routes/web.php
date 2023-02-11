@@ -19,20 +19,14 @@ Route::get('/', function () {
 });
 
 Route::get('/clear-cache', function() {
-    
-    Artisan::call('route:cache');
-    Artisan::call('config:cache');
-    Artisan::call('config:clear');
-    Artisan::call('view:clear');
-    Artisan::call('cache:clear');
     Cache::flush();
     return 'Application cache has been cleared';
 });
 
 Auth::routes();
 
-Route::get('/search/result/{id?}/{tag?}', [App\Http\Controllers\SearchController::class, 'taskNotification'])->name('pingback');
-Route::post('/search/result/{id?}/{tag?}', [App\Http\Controllers\SearchController::class, 'taskResult'])->name('postback');
+Route::get('/dataforseo/result/{id?}/{tag?}', [App\Http\Controllers\SearchController::class, 'taskNotification'])->name('pingback');
+Route::post('/dataforseo/result/{id?}/{tag?}', [App\Http\Controllers\SearchController::class, 'taskResult'])->name('postback');
 
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('home')->middleware('auth');
 
