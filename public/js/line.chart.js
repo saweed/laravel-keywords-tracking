@@ -41,7 +41,7 @@ keywordData.forEach((a, b) => {
             data: [...dataValues], //Samples.utils.numbers(NUMBER_CFG).sort((a, b) => 0.5 - Math.random()),
             borderColor: color(b + 1),
             backgroundColor: transparentize(color(b + 1), 0.5),
-            axis: 'y'
+            // axis: 'y'
         });
         dataValues = new Array(+repetitions).fill(null);
     }
@@ -57,6 +57,7 @@ new Chart(ctx, {
     type: 'line',
     data: data,
     options: {
+      responsive: true,
         plugins: {
             legend: {
                 display: false,
@@ -65,14 +66,15 @@ new Chart(ctx, {
                 }
             }
         },
-        indexAxis: 'y',
+        // indexAxis: 'y',
         scales: {
             y: {
-                beginAtZero: true,
+                beginAtZero: false,
                 title: {
                     display: true,
                     text: 'Iterations'
-                }
+                },
+                reverse: true
             },
             x: {
                 beginAtZero: true,
